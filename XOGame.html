@@ -67,11 +67,21 @@
                     if (winner(Element.innerHTML)) {
 
                         title.innerHTML = `Player ${Element.innerHTML} is the winner`
+                        window.alert(`Player ${Element.innerHTML} is the winner, Replay`)
+                        setTimeout(function() {
+                            location.reload()
+                        }, 1500)
+
                     } else if (turn == 9) {
                         title.innerHTML = "Egalité"
+                        window.alert("Egalité,Replay?")
+                        setTimeout(function() {
+                            location.reload()
+                        }, 500)
                     } else {
                         Element.innerHTML == 'X' ? title.innerHTML = 'Turn to O' : title.innerHTML = 'Turn to X'
                         turn += 1
+                        Element.style.cursor = 'not-allowed'
                     }
 
                 } else
