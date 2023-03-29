@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="XOstyle.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="Game">
+        <div class="Title"><span>X O</span> Game</div>
+        <div class="Squares">
+            <div class="Square" id="c1"></div>
+            <div class="Square" id="c2"></div>
+            <div class="Square" id='c3'></div>
+            <div class="Square" id='c4'></div>
+            <div class="Square" id='c5'></div>
+            <div class="Square" id='c6'></div>
+            <div class="Square" id="c7"></div>
+            <div class="Square" id="c8"></div>
+            <div class="Square" id="c9"></div>
+        </div>
+
+    </div>
+    <script>
+        function winner(tour) {
+            let table = [];
+            console.log(tour)
+            for (i = 1; i <= 9; i++) {
+                table[i] = document.getElementById('c' + i).innerHTML
+
+            }
+            if ( /*vérifier par ligne*/
+                (table[1] == tour && table[2] == tour && table[3] == tour) || (table[4] == tour && table[5] == tour && table[6] == tour) || (table[7] == tour && table[8] == tour && table[9] == tour)
+                /*vérifier par colonne  */
+                ||
+
+                (table[1] == tour && table[4] == tour && table[7] == tour) || (table[2] == tour && table[5] == tour && table[8] == tour) || (table[3] == tour && table[6] == tour && table[9] == tour)
+                /*vérifier les diagonales*/
+                ||
+
+                (table[1] == tour && table[5] == tour && table[9] == tour) || (table[3] == tour && table[5] == tour && table[7] == tour)
+
+            ) {
+
+                return true /*On a un gagnant*/
+            } else {
+                return false
+            }
+
+
+
+        }
+        let turn = 1
+        let title = document.querySelector('.Title')
+
+
+        let Square = document.querySelectorAll('.Square')
+        Square.forEach((Element) => {
+            Element.addEventListener('click', () => {
+                if (Element.innerHTML == '') {
+                    turn % 2 == 0 ? Element.innerHTML = 'O' : Element.innerHTML = 'X'
+
+                    if (winner(Element.innerHTML)) {
+
+                        title.innerHTML = `Player ${Element.innerHTML} is the winner`
+                    } else if (turn == 9) {
+                        title.innerHTML = "Egalité"
+                    } else {
+                        Element.innerHTML == 'X' ? title.innerHTML = 'Turn to O' : title.innerHTML = 'Turn to X'
+                        turn += 1
+                    }
+
+                } else
+                    window.alert("Vous pouvez pas changer une case cocher")
+            })
+        })
+    </script>
+</body>
+
+</html>
